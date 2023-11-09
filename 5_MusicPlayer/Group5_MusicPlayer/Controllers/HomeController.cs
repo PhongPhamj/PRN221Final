@@ -1,21 +1,26 @@
-﻿using Group5_MusicPlayer.Models;
+﻿using Group5_MusicPlayer.Data;
+using Group5_MusicPlayer.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Group5_MusicPlayer.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly MusicPlayerDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(MusicPlayerDbContext context)
         {
-            _logger = logger;
+ 
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var musicPlayerDbContext = _context.Songs.Include(s => s.Author).Include(s => s.Category).Where(s => s.IsPrivate == false);
+            return View(musicPlayerDbContext.ToList());
         }
 
         public IActionResult Privacy()

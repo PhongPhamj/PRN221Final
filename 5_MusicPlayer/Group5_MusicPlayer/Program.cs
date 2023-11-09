@@ -16,7 +16,7 @@ builder.Services.AddControllersWithViews();
 //Configure Session 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(60 * 24);
+    options.IdleTimeout = TimeSpan.FromSeconds(60 * 60 * 24);
     options.Cookie.HttpOnly = true;
 });
 builder.Services.AddHttpContextAccessor();
