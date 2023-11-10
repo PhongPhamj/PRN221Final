@@ -45,7 +45,7 @@
                             {
                                 var UserID = HttpContextAccessor.HttpContext.Session.GetString("ID");
                                 <li class="nav-item">
-                                    <a style=" text-decoration: underline;" asp-action="Details" asp-controller="Playlists" asp-route-id="@UserID">To My Playlist</a>
+                                    <a style=" text-decoration: underline;" asp-action="UserPlaylistDetails" asp-controller="Playlists" asp-route-userid="@UserID">To My Playlist</a>
                                 </li>                               
                                 <li class="nav-item">
                                     <a style=" text-decoration: underline;" asp-action="Details" asp-controller="Users" asp-route-id="@UserID">User Information</a>

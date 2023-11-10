@@ -52,6 +52,24 @@ namespace Group5_MusicPlayer.Controllers
             return View(playlist);
         }
 
+        public async Task<IActionResult> UserPlaylistDetails(int userid)
+        {
+            if (userid == null || _context.Playlists == null)
+            {
+                return NotFound();
+            }
+
+            var playlist = await _context.Playlists
+                .Include(p => p.User)
+                .Where(p =>p.User.UserId == userid)
+                .FirstOrDefaultAsync();
+            if (playlist == null)
+            {
+                return NotFound();
+            }
+            return RedirectToAction("Details", "Playlists", new {id = playlist.PlaylistId});
+        }
+
         // GET: Playlists/Create
         public IActionResult Create()
         {
