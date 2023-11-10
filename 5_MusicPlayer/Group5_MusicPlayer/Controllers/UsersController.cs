@@ -26,7 +26,7 @@ namespace Group5_MusicPlayer.Controllers
         public async Task<IActionResult> Index()
         {
             var account = HttpContext.Session.GetString("Account");
-            if(account != "Admin")
+            if (account != "Admin")
                 return RedirectToAction("Index", "Home");
 
             return _context.Users != null ?
@@ -65,9 +65,21 @@ namespace Group5_MusicPlayer.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("UserId,UserName,Email,Password,Phone,Role")] User user)
         {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+            // Save the user to the database
+            _context.Add(user);
+            await _context.SaveChangesAsync();
+
+            // Create a playlist for the user
+            Playlist playlist = new Playlist()
+            {
+                Title = "Personal Playlist",
+                UserId = user.UserId
+            };
+            _context.Add(playlist);
+            await _context.SaveChangesAsync();
+
+            // Redirect to the Index action
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Users/Edit/5

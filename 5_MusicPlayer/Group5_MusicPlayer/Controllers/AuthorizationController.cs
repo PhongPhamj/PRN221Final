@@ -84,9 +84,18 @@ namespace Group5_MusicPlayer.Controllers
                     UserName = username,
                     Email = email,
                     Password = password,
-                    Phone = phone
+                    Phone = phone,
+                    Role = 1
                 };
                 context.Add(appUser);
+                context.SaveChanges();
+                User userToAddPlaylist = context.Users.FirstOrDefault(u => u.Email == email);
+                Playlist playlist = new Playlist()
+                {
+                    Title = "Personal Playlist",
+                    UserId = userToAddPlaylist.UserId
+                };
+                context.Add(playlist);
                 context.SaveChanges();
                 ViewBag.RegisterMessage = "Registered Successfully";
                 return View("/Views/Authorizations/Login.cshtml");
