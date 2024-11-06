@@ -1,0 +1,7 @@
+organization=chut
+projectKey=chut_net
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.57415
+dashboardUrl=https://sonarcloud.io/dashboard?id=chut_net
+ceTaskId=AZMAc9U-KJX6mAeDHTBT
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZMAc9U-KJX6mAeDHTBT
